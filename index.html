@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Convite Rafael - 1 Aninho</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -31,7 +32,7 @@
       inset: 0;
       z-index: -3;
       background-image:
-        linear-gradient(rgba(0, 105, 180, .38), rgba(0, 40, 95, .52)),
+        linear-gradient(rgba(0, 105, 180, .35), rgba(0, 40, 95, .55)),
         url("fundo.jpg");
       background-size: cover;
       background-position: center;
@@ -44,8 +45,8 @@
       inset: 0;
       background:
         radial-gradient(circle at 20% 15%, rgba(255, 221, 55, .35), transparent 22%),
-        radial-gradient(circle at 82% 18%, rgba(255, 70, 70, .30), transparent 24%),
-        linear-gradient(180deg, rgba(31, 168, 255, .65), rgba(5, 58, 137, .78));
+        radial-gradient(circle at 82% 18%, rgba(255, 70, 70, .28), transparent 24%),
+        linear-gradient(180deg, rgba(31, 168, 255, .52), rgba(5, 58, 137, .70));
       z-index: -1;
     }
 
@@ -60,7 +61,7 @@
       margin: 22px 0;
       padding: 24px 18px;
       border-radius: 28px;
-      background: rgba(255, 255, 255, .88);
+      background: rgba(255, 255, 255, .91);
       color: #17335c;
       box-shadow: 0 18px 40px rgba(0, 0, 0, .22);
       border: 4px solid rgba(255, 214, 64, .95);
@@ -169,7 +170,7 @@
       grid-template-columns: 54px 1fr;
       gap: 12px;
       align-items: center;
-      background: rgba(255, 255, 255, .78);
+      background: rgba(255, 255, 255, .80);
       border-radius: 18px;
       padding: 13px;
       margin: 12px 0;
@@ -189,7 +190,7 @@
     .info span {
       display: block;
       color: #e8252d;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 2px;
     }
 
@@ -226,7 +227,7 @@
     .countdown span {
       display: block;
       font-size: .78rem;
-      font-weight: 800;
+      font-weight: 900;
       color: #064d94;
     }
 
@@ -242,28 +243,105 @@
       position: relative;
       z-index: 1;
       display: grid;
-      gap: 14px;
+      gap: 16px;
     }
 
     label {
-      font-weight: 800;
-      color: #064d94;
+      font-weight: 900;
+      color: #253044;
+      font-size: 1rem;
     }
 
     input, textarea {
       width: 100%;
-      margin-top: 6px;
-      border: 2px solid rgba(10, 90, 168, .28);
+      margin-top: 7px;
+      border: 2px solid rgba(10, 90, 168, .22);
       border-radius: 15px;
-      padding: 14px;
+      padding: 15px;
       font: inherit;
       outline: none;
       background: #fff;
+      color: #111827;
+      font-size: 1.05rem;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, .15);
     }
 
     textarea {
       min-height: 95px;
       resize: vertical;
+    }
+
+    .radio-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .radio-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 2px solid #ddd;
+      border-radius: 16px;
+      padding: 14px 8px;
+      font-weight: 900;
+      color: #4b5563;
+    }
+
+    .radio-card input {
+      width: auto;
+      margin: 0;
+    }
+
+    .radio-card.sim {
+      background: #ecfff2;
+      border-color: #36bd69;
+      color: #18723c;
+    }
+
+    .acompanhantes-box {
+      background: #eef5ff;
+      border: 2px solid #b8d8ff;
+      border-radius: 20px;
+      padding: 15px;
+    }
+
+    .acompanhantes-box h3 {
+      color: #064d94;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      font-weight: 900;
+    }
+
+    #camposAcompanhantes {
+      display: grid;
+      gap: 11px;
+    }
+
+    .criancas-box {
+      background: #fff8e7;
+      border: 2px solid #ffd76a;
+      border-radius: 20px;
+      padding: 15px;
+    }
+
+    .criancas-box h3 {
+      color: #9b5b00;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      font-weight: 900;
+    }
+
+    #camposCriancas {
+      display: grid;
+      gap: 11px;
     }
 
     .full {
@@ -278,6 +356,7 @@
       margin-top: 15px;
       font-weight: 900;
       color: #0c8b3d;
+      font-size: 1.05rem;
     }
 
     footer {
@@ -355,6 +434,24 @@
     @keyframes cair {
       from { transform: translateY(-20vh) rotate(0deg); }
       to { transform: translateY(130vh) rotate(360deg); }
+    }
+
+    @media (max-width: 390px) {
+      .page {
+        padding-inline: 12px;
+      }
+
+      .card {
+        padding: 22px 14px;
+      }
+
+      .details h2, .countdown-card h2, .form-card h2 {
+        font-size: 1.85rem;
+      }
+
+      .radio-area {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -439,22 +536,62 @@
 
       <form id="rsvpForm">
         <label>
-          Nome e sobrenome
-          <input type="text" name="nome" placeholder="Ex: João Silva" required />
+          Nome completo *
+          <input type="text" name="nome" placeholder="Seu nome completo" required />
         </label>
 
         <label>
-          Quantidade de adultos
-          <input type="number" name="adultos" min="0" placeholder="Ex: 2" required />
+          Você vai à festa? *
+          <div class="radio-area">
+            <label class="radio-card sim">
+              <input type="radio" name="vai" value="Sim, vou!" checked />
+              ✓ Sim, vou!
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="vai" value="Não posso" />
+              × Não posso
+            </label>
+          </div>
         </label>
 
         <label>
-          Quantidade de crianças
-          <input type="number" name="criancas" min="0" placeholder="Ex: 1" required />
+          Número de acompanhantes
+          <input type="number" id="qtdAcompanhantes" name="qtdAcompanhantes" min="0" max="50" placeholder="Ex: 3" />
         </label>
 
+        <div id="areaAcompanhantes" class="acompanhantes-box hidden">
+          <h3>Nome dos acompanhantes *</h3>
+          <div id="camposAcompanhantes"></div>
+        </div>
+
         <label>
-          Observações
+          Tem crianças na lista?
+          <div class="radio-area">
+            <label class="radio-card sim">
+              <input type="radio" name="temCriancas" value="Sim" id="temCriancasSim" />
+              Sim
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="temCriancas" value="Não" id="temCriancasNao" checked />
+              Não
+            </label>
+          </div>
+        </label>
+
+        <div id="areaCriancas" class="criancas-box hidden">
+          <label>
+            Quantidade de crianças
+            <input type="number" id="qtdCriancas" name="qtdCriancas" min="0" max="50" placeholder="Ex: 2" />
+          </label>
+
+          <h3 style="margin-top:14px;">Nome das crianças</h3>
+          <div id="camposCriancas"></div>
+        </div>
+
+        <label>
+          Mensagem ou observação
           <textarea name="observacoes" placeholder="Opcional"></textarea>
         </label>
 
@@ -496,7 +633,73 @@
     atualizarContagem();
     setInterval(atualizarContagem, 1000);
 
-    // Depois você troca essa parte pela URL do Apps Script
+    const qtdAcompanhantes = document.getElementById("qtdAcompanhantes");
+    const areaAcompanhantes = document.getElementById("areaAcompanhantes");
+    const camposAcompanhantes = document.getElementById("camposAcompanhantes");
+
+    qtdAcompanhantes.addEventListener("input", function () {
+      const quantidade = Number(this.value || 0);
+
+      camposAcompanhantes.innerHTML = "";
+
+      if (quantidade > 0) {
+        areaAcompanhantes.classList.remove("hidden");
+
+        for (let i = 1; i <= quantidade; i++) {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.name = "acompanhante" + i;
+          input.placeholder = "Nome completo do acompanhante " + i;
+          input.required = true;
+          camposAcompanhantes.appendChild(input);
+        }
+      } else {
+        areaAcompanhantes.classList.add("hidden");
+      }
+    });
+
+    const temCriancasSim = document.getElementById("temCriancasSim");
+    const temCriancasNao = document.getElementById("temCriancasNao");
+    const areaCriancas = document.getElementById("areaCriancas");
+    const qtdCriancas = document.getElementById("qtdCriancas");
+    const camposCriancas = document.getElementById("camposCriancas");
+
+    temCriancasSim.addEventListener("change", function () {
+      if (this.checked) {
+        areaCriancas.classList.remove("hidden");
+      }
+    });
+
+    temCriancasNao.addEventListener("change", function () {
+      if (this.checked) {
+        areaCriancas.classList.add("hidden");
+        qtdCriancas.value = "";
+        camposCriancas.innerHTML = "";
+      }
+    });
+
+    qtdCriancas.addEventListener("input", function () {
+      const quantidade = Number(this.value || 0);
+
+      camposCriancas.innerHTML = "";
+
+      if (quantidade > 0) {
+        for (let i = 1; i <= quantidade; i++) {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.name = "crianca" + i;
+          input.placeholder = "Nome da criança " + i;
+          input.required = true;
+          camposCriancas.appendChild(input);
+        }
+      }
+    });
+
+    /*
+      COLE AQUI A URL DO APPS SCRIPT QUANDO CRIAR A PLANILHA.
+      Exemplo:
+      const scriptURL = "https://script.google.com/macros/s/SEU_CODIGO/exec";
+    */
     const scriptURL = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
 
     document.getElementById("rsvpForm").addEventListener("submit", async function(e) {
@@ -507,19 +710,38 @@
 
       if (scriptURL === "COLE_AQUI_A_URL_DO_APPS_SCRIPT") {
         mensagem.style.color = "#b8171f";
-        mensagem.textContent = "Falta colar a URL do Apps Script no código.";
+        mensagem.textContent = "Falta configurar a planilha. Depois que criar o Apps Script, cole a URL no código.";
         return;
       }
 
       botao.disabled = true;
       botao.textContent = "Enviando...";
+      mensagem.textContent = "";
 
       const formData = new FormData(this);
 
+      const quantidadeAcompanhantes = Number(formData.get("qtdAcompanhantes") || 0);
+      let nomesAcompanhantes = [];
+
+      for (let i = 1; i <= quantidadeAcompanhantes; i++) {
+        nomesAcompanhantes.push(formData.get("acompanhante" + i));
+      }
+
+      const quantidadeCriancas = Number(formData.get("qtdCriancas") || 0);
+      let nomesCriancas = [];
+
+      for (let i = 1; i <= quantidadeCriancas; i++) {
+        nomesCriancas.push(formData.get("crianca" + i));
+      }
+
       const dados = {
         nome: formData.get("nome"),
-        adultos: formData.get("adultos"),
-        criancas: formData.get("criancas"),
+        vai: formData.get("vai"),
+        qtdAcompanhantes: quantidadeAcompanhantes,
+        acompanhantes: nomesAcompanhantes.join(", "),
+        temCriancas: formData.get("temCriancas"),
+        qtdCriancas: quantidadeCriancas,
+        criancas: nomesCriancas.join(", "),
         observacoes: formData.get("observacoes")
       };
 
@@ -535,6 +757,12 @@
           mensagem.style.color = "#0c8b3d";
           mensagem.textContent = "Presença confirmada com sucesso! Obrigado.";
           this.reset();
+
+          areaAcompanhantes.classList.add("hidden");
+          camposAcompanhantes.innerHTML = "";
+          areaCriancas.classList.add("hidden");
+          camposCriancas.innerHTML = "";
+          temCriancasNao.checked = true;
         } else {
           mensagem.style.color = "#b8171f";
           mensagem.textContent = "Não consegui salvar. Tente novamente.";
