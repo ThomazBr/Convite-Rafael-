@@ -501,7 +501,7 @@
         <div class="icon">📍</div>
         <div>
           <span>Local</span>
-          <strong>Espaço Villa caramelados</strong>
+          <strong>Espaço Villa Caramelados</strong>
         </div>
       </div>
 
@@ -695,24 +695,13 @@
       }
     });
 
-    /*
-      COLE AQUI A URL DO APPS SCRIPT QUANDO CRIAR A PLANILHA.
-      Exemplo:
-      const scriptURL = "https://script.google.com/macros/s/SEU_CODIGO/exec";
-    */
-    const scriptURL = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+    const scriptURL = "https://script.google.com/macros/s/AKfycby67FO5iTfdaigoT2aK_Zwg7aMmm4UYjsPtPkRvZ5BULZgxYa5Ctzz7ZsTX4IDM-aQeZw/exec";
 
     document.getElementById("rsvpForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const mensagem = document.getElementById("mensagem");
       const botao = this.querySelector("button[type='submit']");
-
-      if (scriptURL === "COLE_AQUI_A_URL_DO_APPS_SCRIPT") {
-        mensagem.style.color = "#b8171f";
-        mensagem.textContent = "Falta configurar a planilha. Depois que criar o Apps Script, cole a URL no código.";
-        return;
-      }
 
       botao.disabled = true;
       botao.textContent = "Enviando...";
@@ -746,30 +735,26 @@
       };
 
       try {
-        const resposta = await fetch(scriptURL, {
+        await fetch(scriptURL, {
           method: "POST",
+          mode: "no-cors",
           body: JSON.stringify(dados)
         });
 
-        const resultado = await resposta.json();
+        mensagem.style.color = "#0c8b3d";
+        mensagem.textContent = "Presença confirmada com sucesso! Obrigado.";
 
-        if (resultado.result === "success") {
-          mensagem.style.color = "#0c8b3d";
-          mensagem.textContent = "Presença confirmada com sucesso! Obrigado.";
-          this.reset();
+        this.reset();
 
-          areaAcompanhantes.classList.add("hidden");
-          camposAcompanhantes.innerHTML = "";
-          areaCriancas.classList.add("hidden");
-          camposCriancas.innerHTML = "";
-          temCriancasNao.checked = true;
-        } else {
-          mensagem.style.color = "#b8171f";
-          mensagem.textContent = "Não consegui salvar. Tente novamente.";
-        }
+        areaAcompanhantes.classList.add("hidden");
+        camposAcompanhantes.innerHTML = "";
+        areaCriancas.classList.add("hidden");
+        camposCriancas.innerHTML = "";
+        temCriancasNao.checked = true;
+
       } catch (erro) {
         mensagem.style.color = "#b8171f";
-        mensagem.textContent = "Erro ao enviar. Confira a URL do Apps Script.";
+        mensagem.textContent = "Erro ao enviar. Tente novamente.";
       } finally {
         botao.disabled = false;
         botao.textContent = "Enviar confirmação";
