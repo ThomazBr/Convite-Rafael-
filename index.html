@@ -32,22 +32,11 @@
       inset: 0;
       z-index: -3;
       background-image:
-        linear-gradient(rgba(0, 105, 180, .35), rgba(0, 40, 95, .55)),
+        linear-gradient(rgba(0, 105, 180, .18), rgba(0, 40, 95, .22)),
         url("fundo.JPG");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-    }
-
-    .bg::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 15%, rgba(255, 221, 55, .35), transparent 22%),
-        radial-gradient(circle at 82% 18%, rgba(255, 70, 70, .28), transparent 24%),
-        linear-gradient(180deg, rgba(31, 168, 255, .52), rgba(5, 58, 137, .70));
-      z-index: -1;
     }
 
     .page {
@@ -61,11 +50,11 @@
       margin: 22px 0;
       padding: 24px 18px;
       border-radius: 28px;
-      background: rgba(255, 255, 255, .91);
+      background: rgba(255, 255, 255, .62);
       color: #17335c;
       box-shadow: 0 18px 40px rgba(0, 0, 0, .22);
       border: 4px solid rgba(255, 214, 64, .95);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(3px);
       animation: subir .8s ease both;
     }
 
@@ -73,7 +62,7 @@
       content: "";
       position: absolute;
       inset: 10px;
-      border: 2px dashed rgba(0, 99, 180, .45);
+      border: 2px dashed rgba(0, 99, 180, .55);
       border-radius: 22px;
       pointer-events: none;
     }
@@ -107,6 +96,7 @@
     .hero h1 {
       font-size: 2.2rem;
       color: #064d94;
+      text-shadow: 0 2px 0 #fff;
     }
 
     .big-number {
@@ -133,6 +123,9 @@
       line-height: 1.45;
       margin: 0 auto 22px;
       max-width: 420px;
+      color: #17233a;
+      font-weight: 800;
+      text-shadow: 0 1px 0 rgba(255,255,255,.8);
     }
 
     .btn {
@@ -161,6 +154,7 @@
       font-size: 2.1rem;
       color: #064d94;
       margin-bottom: 20px;
+      text-shadow: 0 2px 0 #fff;
     }
 
     .info {
@@ -170,7 +164,7 @@
       grid-template-columns: 54px 1fr;
       gap: 12px;
       align-items: center;
-      background: rgba(255, 255, 255, .80);
+      background: rgba(255, 255, 255, .78);
       border-radius: 18px;
       padding: 13px;
       margin: 12px 0;
@@ -197,6 +191,26 @@
     .info strong {
       display: block;
       font-size: 1.04rem;
+      color: #17233a;
+    }
+
+    .map-link {
+      display: inline-block;
+      color: #064d94;
+      font-weight: 900;
+      text-decoration: none;
+      background: rgba(255, 207, 36, .48);
+      padding: 8px 10px;
+      border-radius: 12px;
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .map-link::after {
+      content: "  • abrir no GPS";
+      font-size: .85rem;
+      color: #e8252d;
+      font-weight: 900;
     }
 
     .countdown {
@@ -209,7 +223,7 @@
     }
 
     .countdown div {
-      background: #fff;
+      background: rgba(255,255,255,.85);
       border: 3px solid #0a5aa8;
       border-radius: 18px;
       padding: 13px 6px;
@@ -260,7 +274,7 @@
       padding: 15px;
       font: inherit;
       outline: none;
-      background: #fff;
+      background: rgba(255,255,255,.95);
       color: #111827;
       font-size: 1.05rem;
     }
@@ -287,7 +301,7 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
-      background: #fff;
+      background: rgba(255,255,255,.9);
       border: 2px solid #ddd;
       border-radius: 16px;
       padding: 14px 8px;
@@ -307,7 +321,7 @@
     }
 
     .acompanhantes-box {
-      background: #eef5ff;
+      background: rgba(238, 245, 255, .90);
       border: 2px solid #b8d8ff;
       border-radius: 20px;
       padding: 15px;
@@ -326,7 +340,7 @@
     }
 
     .criancas-box {
-      background: #fff8e7;
+      background: rgba(255, 248, 231, .92);
       border: 2px solid #ffd76a;
       border-radius: 20px;
       padding: 15px;
@@ -509,7 +523,9 @@
         <div class="icon">🏠</div>
         <div>
           <span>Endereço</span>
-          <strong>R. das Acácias, 549 - Vale do Sereno</strong>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=R.%20das%20Ac%C3%A1cias%2C%20549%20-%20Vale%20do%20Sereno" target="_blank">
+            R. das Acácias, 549 - Vale do Sereno
+          </a>
         </div>
       </div>
     </section>
