@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Convite Rafael - 1 Aninho</title>
+  <title>Convite Rafael - 1 Ano</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 
@@ -13,10 +12,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
@@ -94,14 +89,14 @@
 
     h1 {
       color: #075aa8;
-      font-size: 2.3rem;
+      font-size: 2.4rem;
       text-shadow: 0 2px 0 white;
       margin-top: 4px;
     }
 
     .numero {
       font-family: "Baloo 2", cursive;
-      font-size: 6.5rem;
+      font-size: 6.8rem;
       font-weight: 900;
       line-height: .78;
       color: #ffcf24;
@@ -182,6 +177,7 @@
       cursor: pointer;
       display: block;
       box-shadow: 0 7px 0 rgba(0,0,0,.25);
+      width: 100%;
     }
 
     .btn-confirmar {
@@ -254,6 +250,7 @@
       font-size: 1rem;
       font-weight: 900;
       color: #374151;
+      text-align: left;
     }
 
     input, textarea {
@@ -327,11 +324,28 @@
       font-size: 1rem;
       margin-bottom: 10px;
       font-weight: 900;
+      text-align: left;
     }
 
     #camposAcompanhantes {
       display: grid;
       gap: 10px;
+    }
+
+    .criancas-box {
+      background: #fff3f9;
+      border: 2px solid #efc3da;
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .ajuda-lemb {
+      color: #a13f70;
+      font-size: .95rem;
+      font-weight: 800;
+      margin-top: 8px;
+      text-align: left;
+      line-height: 1.35;
     }
 
     #mensagem {
@@ -352,26 +366,17 @@
       50% { transform: scale(1.035); }
     }
 
-    @media (max-height: 700px) {
-      .page {
-        align-items: flex-start;
-      }
-
-      .numero {
-        font-size: 5.4rem;
-      }
-
+    @media (max-width: 430px) {
       h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       h2 {
-        font-size: 2.5rem;
+        font-size: 2.7rem;
       }
 
-      .info-box {
-        padding: 9px;
-        margin: 8px 0;
+      .numero {
+        font-size: 6.1rem;
       }
     }
   </style>
@@ -385,9 +390,9 @@
       <div class="content">
         <div class="badge">Convite especial</div>
 
-        <h1>Rafael faz</h1>
+        <h1>Rafael</h1>
         <div class="numero">1</div>
-        <h2>aninho!</h2>
+        <h2>ano!</h2>
 
         <p class="frase">
           Venha comemorar esse momento especial com a gente!
@@ -421,7 +426,7 @@
             Abrir endereço no GPS
           </a>
 
-          <button class="btn btn-confirmar" onclick="abrirModal()">
+          <button class="btn btn-confirmar" type="button" onclick="abrirModal()">
             Confirmar presença
           </button>
         </div>
@@ -431,7 +436,7 @@
 
   <div id="modal" class="modal">
     <div class="modal-card">
-      <button class="fechar" onclick="fecharModal()">×</button>
+      <button class="fechar" type="button" onclick="fecharModal()">×</button>
 
       <h3>Confirme sua presença</h3>
 
@@ -446,12 +451,12 @@
           <div class="radio-area">
             <label class="radio-card sim">
               <input type="radio" name="vai" value="Sim, vou!" checked />
-              ✓ Sim
+              ✓ Sim, vou!
             </label>
 
             <label class="radio-card">
               <input type="radio" name="vai" value="Não posso" />
-              × Não
+              × Não posso
             </label>
           </div>
         </label>
@@ -466,10 +471,16 @@
           <div id="camposAcompanhantes"></div>
         </div>
 
-        <label>
-          Quantidade de crianças
-          <input type="number" id="qtdCriancas" name="qtdCriancas" min="0" max="50" placeholder="Ex: 1" />
-        </label>
+        <div class="criancas-box">
+          <label>
+            Quantidade de crianças
+            <input type="number" id="qtdCriancas" name="qtdCriancas" min="0" max="50" placeholder="Ex: 1" />
+          </label>
+
+          <div class="ajuda-lemb">
+            Essa informação nos ajuda a preparar as lembrancinhas! 🎈
+          </div>
+        </div>
 
         <label>
           Observação
@@ -535,32 +546,36 @@
       let nomesAcompanhantes = [];
 
       for (let i = 1; i <= quantidadeAcompanhantes; i++) {
-        nomesAcompanhantes.push(formData.get("acompanhante" + i));
+        const nome = formData.get("acompanhante" + i);
+        if (nome) {
+          nomesAcompanhantes.push(nome);
+        }
       }
 
       const qtdCriancas = Number(formData.get("qtdCriancas") || 0);
-      const obsDigitada = formData.get("observacoes") || "";
+      const observacaoDigitada = (formData.get("observacoes") || "").trim();
 
       const dados = {
         nome: formData.get("nome"),
         vai: formData.get("vai"),
         qtdAcompanhantes: quantidadeAcompanhantes,
         acompanhantes: nomesAcompanhantes.join(", "),
-        temCriancas: qtdCriancas > 0 ? "Sim" : "Não",
         qtdCriancas: qtdCriancas,
-        criancas: "",
-        observacoes: "Quantidade de crianças: " + qtdCriancas + (obsDigitada ? " | Observação: " + obsDigitada : "")
+        observacoes: observacaoDigitada
       };
 
       try {
         await fetch(scriptURL, {
           method: "POST",
           mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
           body: JSON.stringify(dados)
         });
 
         mensagem.style.color = "#0c8b3d";
-        mensagem.textContent = "Presença confirmada com sucesso! Obrigado.";
+        mensagem.textContent = "Presença confirmada com sucesso!";
 
         this.reset();
         camposAcompanhantes.innerHTML = "";
