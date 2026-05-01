@@ -342,6 +342,59 @@
       font-size: 1.05rem;
     }
 
+    .sucesso-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .sucesso-overlay.ativo {
+      display: flex;
+    }
+
+    .sucesso-card {
+      background: white;
+      border-radius: 28px;
+      padding: 30px 22px;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      border: 4px solid #36bd69;
+    }
+
+    .sucesso-card h2 {
+      color: #0c8b3d;
+      font-family: "Baloo 2", cursive;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .sucesso-card p {
+      color: #1f2937;
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .sucesso-card button {
+      margin-top: 20px;
+      background: #0c8b3d;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 22px;
+      font-size: 1.1rem;
+      font-weight: 900;
+      cursor: pointer;
+      width: 100%;
+    }
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.04); }
@@ -479,6 +532,14 @@
     </div>
   </div>
 
+  <div id="sucessoOverlay" class="sucesso-overlay">
+    <div class="sucesso-card">
+      <h2>Presença confirmada!</h2>
+      <p>Obrigado por confirmar. Sua resposta foi registrada com sucesso.</p>
+      <button onclick="fecharSucesso()">Fechar</button>
+    </div>
+  </div>
+
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycby67FO5iTfdaigoT2aK_Zwg7aMmm4UYjsPtPkRvZ5BULZgxYa5Ctzz7ZsTX4IDM-aQeZw/exec";
 
@@ -488,6 +549,14 @@
 
     function fecharModal() {
       document.getElementById("modal").classList.remove("ativo");
+    }
+
+    function mostrarSucesso() {
+      document.getElementById("sucessoOverlay").classList.add("ativo");
+    }
+
+    function fecharSucesso() {
+      document.getElementById("sucessoOverlay").classList.remove("ativo");
     }
 
     const qtdAcompanhantes = document.getElementById("qtdAcompanhantes");
@@ -514,12 +583,13 @@
       }
     });
 
-    document.getElementById("rsvpForm").addEventListener("submit", async function(e) {
+    document.getElementById("rsvpForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
+      const form = this;
+      const botao = form.querySelector("button[type='submit']");
       const mensagem = document.getElementById("mensagem");
-      const botao = this.querySelector("button[type='submit']");
-      const formData = new FormData(this);
+      const formData = new FormData(form);
 
       botao.disabled = true;
       botao.textContent = "Enviando...";
@@ -535,7 +605,7 @@
         }
       }
 
-      const qtdCriancas = Number(formData.get("qtdCriancas") || 0);
+      const qtdCriancas = formData.get("qtdCriancas") || "0";
       const observacaoDigitada = (formData.get("observacoes") || "").trim();
 
       const dados = {
@@ -547,35 +617,36 @@
         observacoes: observacaoDigitada
       };
 
-      try {
-        await fetch(scriptURL, {
+      const blob = new Blob([JSON.stringify(dados)], {
+        type: "text/plain;charset=utf-8"
+      });
+
+      let enviado = false;
+
+      if (navigator.sendBeacon) {
+        enviado = navigator.sendBeacon(scriptURL, blob);
+      }
+
+      if (!enviado) {
+        fetch(scriptURL, {
           method: "POST",
           mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          },
-          body: JSON.stringify(dados)
+          body: blob
         });
-
-        mensagem.style.color = "#0c8b3d";
-        mensagem.textContent = "Presença confirmada com sucesso!";
-
-        this.reset();
-        camposAcompanhantes.innerHTML = "";
-        areaAcompanhantes.classList.remove("ativo");
-
-        setTimeout(() => {
-          fecharModal();
-          mensagem.textContent = "";
-        }, 1800);
-
-      } catch (erro) {
-        mensagem.style.color = "#b8171f";
-        mensagem.textContent = "Erro ao enviar. Tente novamente.";
-      } finally {
-        botao.disabled = false;
-        botao.textContent = "Enviar confirmação";
       }
+
+      mostrarSucesso();
+
+      form.reset();
+      camposAcompanhantes.innerHTML = "";
+      areaAcompanhantes.classList.remove("ativo");
+
+      botao.disabled = false;
+      botao.textContent = "Enviar confirmação";
+
+      setTimeout(() => {
+        fecharModal();
+      }, 600);
     });
   </script>
 </body>
